@@ -2176,12 +2176,12 @@ centeredmaster(Monitor *m)
 	my = 0;
 	tw = mw;
 
-	if (n > m->nmaster) {
+	if (n > m->nmaster || centeralways) {
 		/* go mfact box in the center if more than nmaster clients */
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 		tw = m->ww - mw;
 
-		if (n - m->nmaster > 1) {
+		if ((n - m->nmaster > 1) || centeralways) {
 			/* only one client */
 			mx = (m->ww - mw) / 2;
 			tw = (m->ww - mw) / 2;
@@ -2226,7 +2226,7 @@ centeredfloatingmaster(Monitor *m)
 		return;
 
 	/* initialize nmaster area */
-	if (n > m->nmaster) {
+	if (n > m->nmaster || centeralways) {
 		/* go mfact box in the center if more than nmaster clients */
 		if (m->ww > m->wh) {
 			mw = m->nmaster ? m->ww * m->mfact : 0;
